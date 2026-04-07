@@ -1,0 +1,24 @@
+services:
+  user-service:
+    build: 
+      context: ./service-2
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - ADDRESS_GRPC_TARGET=address-service:50051
+    volumes:
+      - ./service-2:/app
+    depends_on:
+      - address-service
+
+  address-service:
+    build:
+      context: ./service-1
+    ports:
+      - "8001:8001"
+      - "50051:50051"
+    environment:
+      - DEBUG=1
+    volumes:
+      - ./service-1:/app

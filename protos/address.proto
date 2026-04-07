@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package address;
+
+service AddressService {
+  rpc GetUserAddresses (UserRequest) returns (AddressList);
+}
+
+message UserRequest {
+  string user_id = 1;
+}
+
+message Address {
+  string id = 1;
+  string user_id = 2;
+  string city = 3;
+  string state = 4;
+  string zip_code = 5;
+}
+
+message AddressList {
+  repeated Address addresses = 1;
+}
